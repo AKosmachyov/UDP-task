@@ -9,15 +9,17 @@
 #include <iostream>
 #include "Socket.hpp"
 #include "Address.hpp"
+#include "Config.hpp"
 
 int main( int argc, const char * argv[] ) {
-    const int port = 3000;
     
     Socket socket;
     
-    if ( !socket.open( port ) ) {
+    if ( !socket.open( SERVER_PORT ) ) {
         exit( 1 );
     }
+    
+    printf("Server started\n");
     
     // receive packets
     
@@ -32,7 +34,7 @@ int main( int argc, const char * argv[] ) {
         
         // process packet
         
-        printf("Recieve %s", buffer);
+        printf("Recieve %s\n", buffer);
     }
     
     return 0;

@@ -9,13 +9,15 @@
 #include <iostream>
 #include "Socket.hpp"
 #include "Address.hpp"
+#include "Config.hpp"
 
-int main(int argc, const char * argv[]) {
-    const int port = 30000;
-    Address adress = Address( 127, 0, 0, 1, port);
+int main( int argc, const char * argv[] ) {
+//    Address adress = Address( SERVER_ADDRESS, SERVER_PORT );
+    Address adress = Address(127, 0, 0, 1, 3000);
     
     Socket socket;
     
+    const int port = 30000;
     if ( !socket.open( port ) ) {
         exit( 1 );
     }
@@ -31,6 +33,8 @@ int main(int argc, const char * argv[]) {
     }
     
     printf("Message has been sent\n");
+    
+    socket.closeSocket();
     
     return 0;
 }
