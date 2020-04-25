@@ -28,7 +28,7 @@ int main( int argc, const char * argv[] ) {
         int bytes_read = socket.receive( sender, buffer, sizeof( buffer ) );
         
         if ( !bytes_read )
-            break;
+            continue;
         
         // process packet
         

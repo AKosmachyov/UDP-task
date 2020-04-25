@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		947E0C8E245476FE00EB6486 /* Socket.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 947E0C8D245476FE00EB6486 /* Socket.hpp */; };
+		947E0C942454B09600EB6486 /* Address.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94A8214624546DC3009E1E5B /* Address.cpp */; };
+		947E0C952454B09A00EB6486 /* Socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94A8214424546CCD009E1E5B /* Socket.cpp */; };
+		947E0C962454B0A500EB6486 /* Address.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94A8214624546DC3009E1E5B /* Address.cpp */; };
+		947E0C972454B0A800EB6486 /* Socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94A8214424546CCD009E1E5B /* Socket.cpp */; };
 		94A8213024546681009E1E5B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94A8212F24546681009E1E5B /* main.cpp */; };
 		94A8213F24546A88009E1E5B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94A8213E24546A88009E1E5B /* main.cpp */; };
-		94A8214524546CCD009E1E5B /* Socket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94A8214424546CCD009E1E5B /* Socket.cpp */; };
-		94A8214824546DC3009E1E5B /* Address.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94A8214624546DC3009E1E5B /* Address.cpp */; };
-		94A8214924546DC3009E1E5B /* Address.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94A8214624546DC3009E1E5B /* Address.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -189,9 +190,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94A8214524546CCD009E1E5B /* Socket.cpp in Sources */,
-				94A8214824546DC3009E1E5B /* Address.cpp in Sources */,
+				947E0C952454B09A00EB6486 /* Socket.cpp in Sources */,
 				94A8213024546681009E1E5B /* main.cpp in Sources */,
+				947E0C942454B09600EB6486 /* Address.cpp in Sources */,
 				947E0C8E245476FE00EB6486 /* Socket.hpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,7 +201,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94A8214924546DC3009E1E5B /* Address.cpp in Sources */,
+				947E0C962454B0A500EB6486 /* Address.cpp in Sources */,
+				947E0C972454B0A800EB6486 /* Socket.cpp in Sources */,
 				94A8213F24546A88009E1E5B /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

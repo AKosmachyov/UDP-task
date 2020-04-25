@@ -12,6 +12,7 @@
 
 int main(int argc, const char * argv[]) {
     const int port = 30000;
+    Address adress = Address( 127, 0, 0, 1, port);
     
     Socket socket;
     
@@ -23,7 +24,13 @@ int main(int argc, const char * argv[]) {
     
     const char data[] = "hello world!";
     
-    socket.send( Address( 127, 0, 0, 1, port), data, sizeof( data ) );
+    bool isSent = socket.send( adress, data, sizeof( data ) );
+    
+    if ( !isSent ) {
+        exit( 1 );
+    }
+    
+    printf("Message has been sent\n");
     
     return 0;
 }

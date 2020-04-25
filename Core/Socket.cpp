@@ -24,9 +24,9 @@ Socket::~Socket() {
 }
 
 bool Socket::open( unsigned short port) {
-    int socketId = socket( AF_INET, SOCK_DGRAM, IPPROTO_UDP );
+    socketId = socket( AF_INET, SOCK_DGRAM, IPPROTO_UDP );
     
-    if ( isOpen() ) {
+    if ( !isOpen() ) {
         socketId = 0;
         printf( "failed to create socket\n" );
         return false;
@@ -62,24 +62,35 @@ void Socket::closeSocket() {
 }
 
 bool Socket::isOpen() const {
-    return socketId < 1;
+    return socketId > 0;
 }
 
 bool Socket::send( const Address &destination, const void *data, int packetSize ) {
+    
+    if ( !isOpen() ) {
+        printf( "failed open the socket before sending data\n" );
+        return false;
+    }
+    
     sockaddr_in address;
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = htonl( destination.getAddress() );
     address.sin_port = htons( destination.getPort() );
     
-    int sentBytes = sendto( socketId, (const char*)data, packetSize, 0, (sockaddr*)&address, sizeof(sockaddr_in) );
+    int bytesSent = sendto( socketId, (const char*)data, packetSize, 0, (sockaddr*)&address, sizeof(sockaddr_in) );
     
-    return sentBytes == packetSize;
+    if ( bytesSent == packetSize ) {
+        return true;
+    }
+    
+    printf( "failed message not send\n" );
+    return false;
 }
 
 int Socket::receive( Address &sender, void *data, int size ) {
     unsigned char packetData[size];
     unsigned int maximumPacketSize = sizeof( packetData );
-
+    
     sockaddr_in from;
     socklen_t fromLength = sizeof( from );
     
@@ -88,11 +99,11 @@ int Socket::receive( Address &sender, void *data, int size ) {
     if ( receivedBytes <= 0 ) {
         return 0;
     }
-
+    
     unsigned int fromAddress = ntohl( from.sin_addr.s_addr );
     unsigned int fromPort = ntohs( from.sin_port );
-
+    
     sender = Address( fromAddress, fromPort );
-
+    
     return receivedBytes;
 }
