@@ -7,34 +7,50 @@
 //
 
 #include <iostream>
+#include <cmath>
 #include "Socket.hpp"
 #include "Address.hpp"
 #include "Config.hpp"
 
+int MAX_BUFFER_SIZE = 256;
+Socket serverSocket;
+
+void sendResult( Address &address, int result ) {
+    char message[ sizeof( result ) ];
+    sprintf( message, "%d", result );
+    
+    serverSocket.send( address, message, sizeof( message ) );
+}
+
 int main( int argc, const char * argv[] ) {
     
-    Socket socket;
-    
-    if ( !socket.open( SERVER_PORT ) ) {
+    if ( !serverSocket.open( SERVER_PORT ) ) {
         exit( 1 );
     }
     
-    printf("Server started\n");
+    printf( "Server started\n" );
     
     // receive packets
     
-    while ( true )
-    {
+    while ( true ) {
         Address sender;
-        unsigned char buffer[256];
-        int bytes_read = socket.receive( sender, buffer, sizeof( buffer ) );
+        char buffer[ MAX_BUFFER_SIZE ];
+        int isBytesRead = serverSocket.receive( sender, buffer, sizeof( buffer ) );
         
-        if ( !bytes_read )
+        if ( !isBytesRead )
             continue;
         
         // process packet
         
-        printf("Recieve %s\n", buffer);
+        printf( "Log message: %s, from: %d\n", buffer, sender.getAddress() );
+        
+        try {
+            int clientNumber;
+            sscanf( buffer, "%d", &clientNumber );
+            sendResult( sender, pow( clientNumber, 2 ) );
+        } catch ( std::exception const &e ) {
+            printf( "Wrong request data: %s", buffer );
+        }
     }
     
     return 0;
