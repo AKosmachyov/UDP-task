@@ -61,7 +61,7 @@ void sendRequests() {
         printf( "#%d Client number: %d. Server result: %s\n", executedRequests + 1, numberForRequest, responseMessage );
         
         int sec = getRandomNumber( 5, 15 );
-        printf( "Wait %d s before next request\n", sec );
+        printf( "Wait %ds before next request\n\n", sec );
         auto delayTime = std::chrono::seconds( sec );
         std::this_thread::sleep_for( delayTime );
         
