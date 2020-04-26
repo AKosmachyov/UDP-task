@@ -33,9 +33,9 @@ void waitForResponse( char *responseMessage ) {
     while ( true )
     {
         Address sender;
-        int bytes_read = clientSocket.receive( sender, responseMessage, sizeof( responseMessage ) );
+        int isBytesRead = clientSocket.receive( sender, responseMessage, sizeof( responseMessage ) );
         
-        if ( bytes_read )
+        if ( isBytesRead )
             return;
     }
 }
@@ -48,6 +48,7 @@ void sendRequests() {
         char message[ sizeof( numberForRequest ) ];
         sprintf( message, "%d", numberForRequest );
         
+        printf( "Send message: %s\n", message );
         bool isSent = clientSocket.send( SERVER_ADDRESS, message, sizeof( message ) );
         
         if ( !isSent ) {
